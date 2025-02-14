@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 
 @Getter
 @Setter
@@ -29,4 +31,15 @@ public class Employee {
 
     @Column(name="email",unique = true,nullable = false)
     private String email;
+
+    public Employee(Long id, String firstName, String lastName, String email) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+    }
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name="employee_id", referencedColumnName = "id")
+    private List<Salary> salaryList;
 }
